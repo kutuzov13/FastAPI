@@ -1,5 +1,6 @@
 import logging
 import os
+import types
 
 from fastapi import FastAPI
 from tortoise import Tortoise, run_async
@@ -8,7 +9,7 @@ from tortoise.contrib.fastapi import register_tortoise
 log = logging.getLogger('uvicorn')
 
 
-TORTOISE_ORM = {
+TORTOISE_ORM = types.MappingProxyType({
     'connections': {'default': os.getenv('DATABASE_URL')},
     'apps': {
         'models': {
@@ -16,7 +17,7 @@ TORTOISE_ORM = {
             'default_connection': 'default',
         },
     },
-}
+})
 
 
 def init_db(app: FastAPI) -> None:

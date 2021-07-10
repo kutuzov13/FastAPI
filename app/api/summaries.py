@@ -1,12 +1,9 @@
 from typing import List
 
-from fastapi import APIRouter, HTTPException
 from app.api import crud
-from app.models.schemas import (
-    SummaryPayloadSchema,
-    SummaryResponseSchema,
-)
+from app.models.schemas import SummaryPayloadSchema, SummaryResponseSchema
 from app.models.tortoise import SummarySchema
+from fastapi import APIRouter, HTTPException
 
 router = APIRouter()
 
@@ -37,4 +34,5 @@ async def read_summary(id_summer: int) -> SummarySchema:
 
 @router.get('/', response_model=List[SummarySchema])
 async def read_all_summaries() -> List[SummarySchema]:
+    """Get all summary."""
     return await crud.get_all()

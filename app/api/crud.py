@@ -1,4 +1,4 @@
-from typing import Union, List
+from typing import List, Union
 
 from app.models.schemas import SummaryPayloadSchema
 from app.models.tortoise import TextSummary
@@ -23,5 +23,6 @@ async def get(id_summer: int) -> Union[dict, None]:
 
 
 async def get_all() -> List:
+    """All summaries."""
     summaries = await TextSummary.all().values()
     return summaries
