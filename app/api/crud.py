@@ -14,9 +14,9 @@ async def post(payload: SummaryPayloadSchema) -> int:
     return summary.id
 
 
-async def get(id_summer: int) -> Union[dict, None]:
+async def get(id_summary: int) -> Union[dict, None]:
     """Get summary by number id."""
-    summary = await TextSummary.filter(id=id_summer).first().values()
+    summary = await TextSummary.filter(id=id_summary).first().values()
     if summary:
         return summary[0]
     return None
