@@ -50,10 +50,7 @@ def test_read_summary_incorrect_id(test_app_with_db):
 
 def test_remove_summary(test_app_with_db):
     """Test method DELETE by url."""
-    response = test_app_with_db.post(
-        '/summaries/',
-        data=json.dumps({'url': TEST_URL}),
-    )
+    response = test_app_with_db.post('/summaries/', data=json.dumps({'url': TEST_URL}))
     summary_id = response.json()['id']
 
     response = test_app_with_db.delete(f'/summaries/{summary_id}/')

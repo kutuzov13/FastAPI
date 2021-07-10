@@ -7,7 +7,8 @@ from app.models.schemas import (
     SummaryUpdatePayloadSchema,
 )
 from app.models.tortoise import SummarySchema
-from fastapi import APIRouter, HTTPException
+from app.summarizer import generate_summary
+from fastapi import APIRouter, BackgroundTasks, HTTPException
 
 router = APIRouter()
 
@@ -16,12 +17,12 @@ NOT_FOUND_CODE = 404
 
 
 @router.post('/', response_model=SummaryResponseSchema, status_code=201)
-async def create_summary(payload: SummaryPayloadSchema):
+async def create_summary(payload: SummaryPayloadSchema, background_tasks: BackgroundTasks):
     """Create summary."""
-    summary = await crud.post(payload)
-
+    summary_id = await crud.post(payload)
+    background_tasks.add_task(generate_summary, summary_id, payload.url)
     response_object = {
-        'id': summary,
+        'id': summary_id,
         'url': payload.url,
     }
     return response_object

@@ -6,10 +6,7 @@ from app.models.tortoise import TextSummary
 
 async def post(payload: SummaryPayloadSchema) -> int:
     """Read the body of the request and validate data."""
-    summary = TextSummary(
-        url=payload.url,
-        summary='dummy summary',
-    )
+    summary = TextSummary(url=payload.url, summary='')
     await summary.save()
     return summary.id
 
