@@ -3,7 +3,7 @@ name: Continuous Integration and Delivery
 on: [push]
 
 env:
-  IMAGE: docker.pkg.github.com/kutuzov13/fastapi/summarizer
+  IMAGE: docker.pkg.github.com/$(echo $GITHUB_REPOSITORY | tr '[A-Z]' '[a-z]')/summarizer
 
 jobs:
   build:
@@ -24,8 +24,8 @@ jobs:
           docker build \
             --cache-from ${{ env.IMAGE }}:latest \
             --tag ${{ env.IMAGE }}:latest \
-            --file Dockerfile.prod \
-            "."
+            --file ./Dockerfile.prod \
+            "./"
       - name: Push image
         run: |
           docker push ${{ env.IMAGE }}:latest
@@ -61,7 +61,5 @@ jobs:
             -e DATABASE_TEST_URL=sqlite://sqlite.db \
             -p 5003:8765 \
             ${{ env.IMAGE }}:latest
-      - name: Pytest
-        run: docker exec fastapi-tdd python -m pytest .
       - name: Flake8
         run: docker exec fastapi-tdd python -m flake8 .
