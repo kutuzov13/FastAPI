@@ -8,3 +8,5 @@ requests==2.25.1
 gunicorn==20.1.0
 pytest-cov==2.12.1
 wemake-python-styleguide==0.15.3
+pytest-xdist==2.3.0
+newspaper3k==0.2.8
