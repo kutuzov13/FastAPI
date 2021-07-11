@@ -8,6 +8,20 @@ Developing RESTfull API Through Testing and Deployment.
 
 A light API for performing CRUD operations in this example of interacting with links.
 
+`DOCS` http://localhost/docs
+
+`GET` http://localhost/ping
+
+`GET` http://localhost/summaries
+
+`POST` http://localhost/summaries
+
+`GET` http://localhost/summaries/{id}
+
+`PUT` http://localhost/summaries/{id}
+
+`DELETE` http://localhost/summaries/{id}
+
 
 # Instruments
 
