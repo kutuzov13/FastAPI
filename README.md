@@ -9,7 +9,7 @@ Developing RESTfull API Through Testing and Deployment.
 
 A light API for performing CRUD operations in this example of interacting with links.
 
-`DOCS` http://localhost/docs
+`GET` http://localhost/docs
 
 `GET` http://localhost/ping
 
